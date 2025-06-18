@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
+import { RecipeAttempts } from "@/components/recipe-attempts"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -89,6 +90,51 @@ const comments = [
         date: "1 week ago",
       },
     ],
+  },
+]
+
+const sampleAttempts = [
+  {
+    id: "1",
+    userId: "user1",
+    userName: "sourdoughfan",
+    userAvatar: "/placeholder.svg?height=32&width=32",
+    rating: 5,
+    review: "This recipe is absolutely perfect! My starter was ready in exactly 7 days and has been going strong for 3 months now. The detailed instructions made it so easy to follow.",
+    photos: ["/placeholder.svg?height=200&width=300", "/placeholder.svg?height=200&width=300"],
+    difficulty: "Medium" as const,
+    timeSpent: "7 days",
+    date: "2 weeks ago",
+    likes: 12,
+    comments: 3,
+  },
+  {
+    id: "2",
+    userId: "user2",
+    userName: "newbaker",
+    userAvatar: "/placeholder.svg?height=32&width=32",
+    rating: 4,
+    review: "Great recipe! I had some issues with the temperature consistency, but once I got that sorted, it worked perfectly. I used whole wheat flour as suggested and it added a nice complexity.",
+    photos: ["/placeholder.svg?height=200&width=300"],
+    difficulty: "Medium" as const,
+    timeSpent: "8 days",
+    date: "1 week ago",
+    likes: 8,
+    comments: 1,
+  },
+  {
+    id: "3",
+    userId: "user3",
+    userName: "breadmaster",
+    userAvatar: "/placeholder.svg?height=32&width=32",
+    rating: 5,
+    review: "As the original author, I'm thrilled to see how well this recipe works for everyone! The key is patience and consistency. Don't rush the process.",
+    photos: ["/placeholder.svg?height=200&width=300", "/placeholder.svg?height=200&width=300", "/placeholder.svg?height=200&width=300"],
+    difficulty: "Medium" as const,
+    timeSpent: "7 days",
+    date: "3 days ago",
+    likes: 25,
+    comments: 7,
   },
 ]
 
@@ -247,6 +293,9 @@ export default function RecipeDetailPage() {
               </CardContent>
             </Card>
 
+            {/* Recipe Attempts */}
+            <RecipeAttempts recipeId={recipe.id.toString()} attempts={sampleAttempts} />
+
             {/* Comments */}
             <Card>
               <CardHeader>
@@ -369,11 +418,19 @@ export default function RecipeDetailPage() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-slate-600">Avg Rating</span>
-                <span className="font-semibold">4.8/5</span>
+                <span className="font-semibold">
+                  {(sampleAttempts.reduce((sum, attempt) => sum + attempt.rating, 0) / sampleAttempts.length).toFixed(1)}/5
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-slate-600">Times Made</span>
-                <span className="font-semibold">1,247</span>
+                <span className="font-semibold">{sampleAttempts.length}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-600">Total Photos</span>
+                <span className="font-semibold">
+                  {sampleAttempts.reduce((sum, attempt) => sum + attempt.photos.length, 0)}
+                </span>
               </div>
             </CardContent>
           </Card>

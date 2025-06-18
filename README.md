@@ -8,10 +8,23 @@ A modern recipe sharing and collaboration platform inspired by GitHub's fork sys
 - 🔄 Fork and modify existing recipes
 - ⭐ Star and save favorite recipes
 - 💬 Comment and discuss recipes
+- 📸 Share recipe attempts with photos and reviews
 - 👥 User profiles and activity tracking
 - 🏷️ Recipe tagging and categorization
 - ⏱️ Cooking time and difficulty indicators
 - 🔍 Advanced filtering and search
+
+## Recipe Attempts Feature
+
+Users can now share their cooking experiences by uploading photos and writing reviews of their recipe attempts. This feature includes:
+
+- **Photo Upload**: Multiple photo uploads to showcase cooking results
+- **Star Rating**: Rate recipes from 1-5 stars
+- **Difficulty Assessment**: Share how difficult the recipe was for you
+- **Time Tracking**: Record how long the recipe took to make
+- **Detailed Reviews**: Write comprehensive reviews with tips and modifications
+- **Community Interaction**: Like and comment on other users' attempts
+- **Recipe Statistics**: View success rates, average ratings, and total attempts
 
 ## Tech Stack
 
@@ -26,6 +39,7 @@ A modern recipe sharing and collaboration platform inspired by GitHub's fork sys
 - **Date Handling**: date-fns
 - **Charts**: Recharts
 - **Notifications**: Sonner
+- **File Upload**: Native HTML5 File API with FormData
 
 ## Getting Started
 
@@ -66,17 +80,28 @@ pnpm dev
 ```
 fork-and-feast/
 ├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   └── attempts/      # Recipe attempts API
 │   ├── user/              # User profile pages
 │   ├── recipe/            # Recipe pages
 │   ├── fork/              # Fork functionality
 │   ├── pull/              # Pull request system
 │   └── pulls/             # Pull requests listing
 ├── components/            # Reusable UI components
+│   ├── ui/               # Base UI components
+│   └── recipe-attempts.tsx # Recipe attempts component
 ├── lib/                   # Utility functions and configurations
 ├── hooks/                 # Custom React hooks
 ├── public/               # Static assets
 └── styles/               # Global styles
 ```
+
+## API Endpoints
+
+### Recipe Attempts
+
+- `POST /api/attempts` - Submit a new recipe attempt with photos and review
+- `GET /api/attempts?recipeId=1` - Get attempts for a specific recipe
 
 ## Contributing
 
